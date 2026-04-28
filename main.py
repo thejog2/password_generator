@@ -37,3 +37,35 @@ def generate_password(length, use_lower, use_upper, use_digits, use_symbols):
     return password
     # Build the password by randomly choose characters from the pool we created
     # We do this 'length' times to get a password of the desired length
+
+
+
+    # The main function handles user interaction and runs the generator
+def main():
+    # Display a simple title for the program
+    print("=== Password Generator ===")
+
+    # Ask the user how long the password should be
+    # input() returns a string, so we convert it into an integer
+    length = int(input("Password length: "))
+
+    # Ask the user which types of characters to include
+    # Each answer becomes True (yes) or False (no)
+    use_lower = input("Include lowercase letters? (y/n): ").lower() == 'y'
+    use_upper = input("Include uppercase letters? (y/n): ").lower() == 'y'
+    use_digits = input("Include digits? (y/n): ").lower() == 'y'
+    use_symbols = input("Include symbols? (y/n): ").lower() == 'y'
+
+    # Call the generator function with the user's choices
+    password = generate_password(length, use_lower, use_upper, use_digits, use_symbols)
+
+    # Display the generated password to the user
+    print("\nGenerated password:") # \n adds a blank line for better readability
+    print(password)
+
+
+# Always ensure this line is outside of the fucntion, otherwise it could crash the program
+if __name__ == "__main__":
+    main()
+    # This line checks if the script is being run directly (instead of imported as a module)
+    # If it is, it calls the main() function to start the program
