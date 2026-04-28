@@ -47,7 +47,14 @@ def main():
 
     # Ask the user how long the password should be
     # input() returns a string, so we convert it into an integer
-    length = int(input("Password length: "))
+    while True:
+        try:
+            length = int(input("Password length: "))
+            break
+        except ValueError:
+            print("Please enter a valid number")
+    # Keep asking for the password length until the user enters a valid number
+    # We added this input within a loop to prevent the program from crashing if the user enters something that isn't a number
 
     # Ask the user which types of characters to include
     # Each answer becomes True (yes) or False (no)
