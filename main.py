@@ -80,12 +80,12 @@ def main():
 
 
     # Call the generator function with the user's choices
-    password = generate_password(length, use_lower, use_upper, use_digits, use_symbols)
+    print("\nGenerated Passwords:")
 
-
-    # Display the generated password to the user
-    print("\nGenerated password:") # \n adds a blank line for better readability
-    print(password)
+    # Generate and print the requested number of passwords
+    for i in range(count):
+        password = generate_password(length, use_lower, use_upper, use_digits, use_symbols)
+        print(f"{i + 1}: {password}")
 
 
 # Always ensure this line is outside of the fucntion, otherwise it could crash the program
