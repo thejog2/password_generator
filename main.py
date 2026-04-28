@@ -4,44 +4,12 @@
 import string
 import random
 
-
-# This function generates a password based on:
-# - length: how long the password should be
-# - use_lower: include lowercase letters
-# - use_upper: include uppercase letters
-# - use_digits: include numbers
-# - use_symbols: include special characters
-def generate_password(length, use_lower, use_upper, use_digits, use_symbols):
-
-
-    # Start with an empty pool of characters
-    # We'll add to this based on the user's choices
-    characters = ""
-
-
-    # Add character sets to the pool depending on users choices
-    if use_lower:
-        characters += string.ascii_lowercase  # Add lowercase letters
-    if use_upper:
-        characters += string.ascii_uppercase  # Add uppercase letters
-    if use_digits:
-        characters += string.digits  # Add numbers
-    if use_symbols:
-        characters += string.punctuation  # Add special characters
-    # Each 'if' check whether the user wants that type of character
-    # if yes, we append that set to our 'characters' string
-
-
-    if not characters:
-        raise ValueError("No character sets selected")
-    # If the user didn't select any character types, we can't generate a password
-    # So we raise an error to let them know they need to choose at least one
-
-
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
-    # Build the password by randomly choose characters from the pool we created
-    # We do this 'length' times to get a password of the desired length
+# We import the functions we need from our other files
+# This allows us to keep our code organized and modular
+# - generate_password: the function that creates passwords based on user preferences
+# - check_strength: the function that evaluates how strong a password is
+from generator import generate_password
+from strength import check_strength
 
 
     # The main function handles user interaction and runs the generator
@@ -95,38 +63,3 @@ if __name__ == "__main__":
     main()
     # This line checks if the script is being run directly (instead of imported as a module)
     # If it is, it calls the main() function to start the program
-
-
-# This function analyses the password and returns a strength rating
-def check_strength(password):
-    score = 0
-    # We will add checks here
-    # Check length
-    if len(password) >= 8:
-        score += 1
-
-    # Check for lowercase letters
-    if any(char.islower() for char in password):
-        score += 1
-
-    # Check for uppercase letters
-    if any(char.isupper() for char in password):
-        score += 1
-
-    # Check for digits
-    if any(char.isdigit() for char in password):
-        score += 1
-
-    # Check for symbols
-    if any(char in string.punctuation for char in password):
-        score += 1
-
-    # Based on the score, we can classify the password strength
-    if score <= 2:
-        return "Weak"
-    elif score <= 4:
-        return "Medium"
-    else:
-        return "Strong"
-    
-    return score
