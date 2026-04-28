@@ -83,9 +83,11 @@ def main():
     print("\nGenerated Passwords:")
 
     # Generate and print the requested number of passwords
+    # We also check the strength of each password and display it next to the password
     for i in range(count):
         password = generate_password(length, use_lower, use_upper, use_digits, use_symbols)
-        print(f"{i + 1}: {password}")
+        strength = check_strength(password)
+        print(f"{i + 1}: {password}  ({strength})")
 
 
 # Always ensure this line is outside of the fucntion, otherwise it could crash the program
@@ -93,3 +95,38 @@ if __name__ == "__main__":
     main()
     # This line checks if the script is being run directly (instead of imported as a module)
     # If it is, it calls the main() function to start the program
+
+
+# This function analyses the password and returns a strength rating
+def check_strength(password):
+    score = 0
+    # We will add checks here
+    # Check length
+    if len(password) >= 8:
+        score += 1
+
+    # Check for lowercase letters
+    if any(char.islower() for char in password):
+        score += 1
+
+    # Check for uppercase letters
+    if any(char.isupper() for char in password):
+        score += 1
+
+    # Check for digits
+    if any(char.isdigit() for char in password):
+        score += 1
+
+    # Check for symbols
+    if any(char in string.punctuation for char in password):
+        score += 1
+
+    # Based on the score, we can classify the password strength
+    if score <= 2:
+        return "Weak"
+    elif score <= 4:
+        return "Medium"
+    else:
+        return "Strong"
+    
+    return score
